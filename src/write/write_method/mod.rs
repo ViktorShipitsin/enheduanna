@@ -57,6 +57,7 @@ where
 //               Макрос               \\
 //------------------------------------\\
 
+/// Макрос объявления метода записи.
 #[macro_export]
 macro_rules! impl_inline_write_methods {
     ($writer:ident;
@@ -99,7 +100,7 @@ macro_rules! impl_inline_write_methods {
                 $ser,
                 { <$ser as $crate::shared::write::serializer::Serializer<$ty>>::MAX_BYTES }
             >::new(&mut self.writer);
-            wm.write_many(values)
+            wm.write(values)
         }
     };
 }

@@ -9,11 +9,13 @@ impl WriteMode for Serial {
     const IS_BATCH: bool = true;
 }
 
+/// Имплементация функционала для режима записи Serial.
 impl<'a, T, W, S, const N: usize> WriteMethod<'a, T, W, Serial, S, N>
 where
     W: Write + ?Sized,
     S: Serializer<T>,
 {
+    /// Функция записи.
     pub fn write<I>(&mut self, iter: I) -> IoResult<()>
     where
         I: IntoIterator,
