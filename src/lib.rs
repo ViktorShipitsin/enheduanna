@@ -1,6 +1,3 @@
-// Реэкспорт макроса для объявления нового WriteMethod.
-#[macro_use] mod macros;
-
 // Публичные модули.
 pub mod write;
 
