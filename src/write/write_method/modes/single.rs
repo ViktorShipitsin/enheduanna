@@ -16,7 +16,7 @@ where
     S: Serializer<T>,
 {
     /// Функция записи.
-    pub fn write(&mut self, value: T) -> IoResult<()> {
-        self.write_byte(value)
+    pub fn write(&mut self, value: T, buf: &mut [u8; N]) -> IoResult<()> {
+        self.write_value(value, buf)
     }
 }

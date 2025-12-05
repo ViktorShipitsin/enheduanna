@@ -8,6 +8,8 @@ use std::marker::PhantomData;
 use super::serializer::{Serializer};
 
 pub mod modes;
+
+// Импорт и экспорт макросов.
 #[macro_use] mod macros;
 
 //-------------------------------------\\

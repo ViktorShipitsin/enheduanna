@@ -1,7 +1,7 @@
-use std::io::{Write, Result as IoResult};
+use std::io::{Result as IoResult, Write};
 
-use super::WriteMethod;
 use super::Serializer;
+use super::WriteMethod;
 use super::WriteMode;
 
 pub mod single;
@@ -15,11 +15,10 @@ where
     S: Serializer<T>,
 {
     /// Базовая функция записи (побайтовая).
-    fn write_byte(&mut self, value: T) -> IoResult<()> { // 25.11.2025 TODO: в будущем должно быть сменено From<SerError> или аналогичным решением.
-        let mut buf = [0u8; N];
-        let n = S::serialize(value, &mut buf)
-            .map_err(|e| std::io::Error::new(std::io::ErrorKind::InvalidData, e))?; // 25.11.2025 TODO: в будущем должно быть сменено From<SerError> или аналогичным решением.
-        debug_assert!(n <= N);
-        self.writer.write_all(&buf[..n])
+    fn write_value(&mut self, value: T, buf: &mut [u8; N]) -> IoResult<()> {
+        debug_assert!(N >= S::MAX_BYTES);
+        let ser_bytes: usize = S::serialize(value, buf);
+        debug_assert!(ser_bytes <= N);
+        self.writer.write_all(&buf[..ser_bytes])
     }
 }

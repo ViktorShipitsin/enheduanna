@@ -1,7 +1,7 @@
-use std::io::{Write, Result as IoResult};
+use std::io::{Result as IoResult, Write};
 
-use super::WriteMethod;
 use super::Serializer;
+use super::WriteMethod;
 use super::WriteMode;
 
 pub struct Serial;
@@ -16,14 +16,14 @@ where
     S: Serializer<T>,
 {
     /// Функция записи.
-    pub fn write<I>(&mut self, iter: I) -> IoResult<()>
+    pub fn write<I>(&mut self, buf: &mut [u8; N], iter: I) -> IoResult<()>
     where
         I: IntoIterator,
         I::Item: Into<T>,
     {
         for item in iter {
             let v: T = item.into();
-            self.write_byte(v)?;
+            self.write_value(v, buf)?;
         }
         Ok(())
     }
