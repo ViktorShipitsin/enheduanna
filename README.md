@@ -2,6 +2,7 @@
 
 Licensed under either of **CC0-1.0** or **MIT** or **Apache-2.0**.
 You may choose **any** of these licenses at your option.
+Contributions must be made under all three licenses.
 
 ## Available Licenses
 
