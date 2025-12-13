@@ -8,7 +8,7 @@ macro_rules! impl_int_serializer {
             const MAX_BYTES: usize = std::mem::size_of::<$type>();
 
             fn serialize(value: $type, buf: &mut [u8]) -> usize {
-                buf[..2].copy_from_slice(&value.to_le_bytes());
+                buf.copy_from_slice(&value.$endian_fn());
                 return Self::MAX_BYTES
             }
         }
